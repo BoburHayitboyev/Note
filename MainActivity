@@ -1,0 +1,56 @@
+package com.example.zametka;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity {
+
+    ListView listView;
+    ArrayList<Note_item> note_items;
+    ImageView imageView;
+    EditText editText;
+    int i;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        listView = findViewById(R.id.listView);
+        imageView = findViewById(R.id.img_plus);
+        editText = findViewById(R.id.edt_note);
+        i = 0;
+
+        note_items = new ArrayList<>();
+
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String str = editText.getText().toString();
+                if (str.matches("")) {
+                    Toast.makeText(getBaseContext(), "Eslatma yozingda eee", Toast.LENGTH_SHORT).show();
+                } else {
+                    note_items.add(new Note_item(str, i + 1));
+                }
+                i++;
+            }
+        });
+
+        NoteAdapter adapter = new NoteAdapter(this, R.layout.item_note, note_items);
+
+        listView.setAdapter(adapter);
+
+
+    }
+}
