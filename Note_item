@@ -1,0 +1,12 @@
+package com.example.zametka;
+
+public class Note_item {
+
+    String note;
+    int count;
+
+    public Note_item(String note, int count) {
+        this.note = note;
+        this.count = count;
+    }
+}
